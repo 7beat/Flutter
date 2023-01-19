@@ -1,16 +1,31 @@
-# untitled
+# Flutter ToDo App
 
-A new Flutter project.
+Simple ToDo app for mobile devices
 
-## Getting Started
+## Functionality
 
-This project is a starting point for a Flutter application.
+* Add
+* Remove
+* Complete
 
-A few resources to get you started if this is your first Flutter project:
+# Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Home
+![](img/main.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Adding
+![](img/BeforeAdd.png)
+
+## Added
+![](img/AfterAdd.png)
+
+## Completed
+![](img/Done.png)
+
+## Deleted
+![](img/Deletion.png)
+
+<!--
+## SQL/ERD
+![](Diagram.png)
+-->

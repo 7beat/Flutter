@@ -12,6 +12,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final todosList = ToDo.todoList();
+  final _todoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,6 @@ class _HomeState extends State<Home> {
             ),
             child: Column(
               children: [
-                searchBox(),
                 Expanded(
                     child: ListView(
                       children: [
@@ -78,6 +78,7 @@ class _HomeState extends State<Home> {
                     borderRadius: BorderRadius.circular(10),
                 ),
                 child: TextField(
+                  controller: _todoController,
                   decoration: InputDecoration(
                     hintText: 'Add a new todo item',
                     border: InputBorder.none
@@ -91,7 +92,9 @@ class _HomeState extends State<Home> {
                     right: 20),
                 child: ElevatedButton(
                   child: Text('+', style: TextStyle(fontSize: 40,),),
-                  onPressed: () {},
+                  onPressed: () {
+                    _addToDoItem(_todoController.text);
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.blue,
                     minimumSize: Size(60, 60),
@@ -119,21 +122,11 @@ class _HomeState extends State<Home> {
     });
   }
 
-  Widget searchBox() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 15),
-      decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(20)),
-      child: TextField(
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(0),
-            prefixIcon: Icon(Icons.search, color: Colors.black, size: 20),
-            prefixIconConstraints: BoxConstraints(maxHeight: 20, minWidth: 25),
-            border: InputBorder.none,
-            hintText: 'Search',
-            hintStyle: TextStyle(color: Colors.grey)),
-      ),
-    );
+  void _addToDoItem(String toDo){
+    setState(() {
+      todosList.add(ToDo(id: DateTime.now().millisecondsSinceEpoch.toString(), todoText: toDo));
+    });
+    _todoController.clear();
   }
 
   AppBar _buildAppBar() {

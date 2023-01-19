@@ -3,9 +3,14 @@ import 'package:untitled/constants/colors.dart';
 import 'package:untitled/widgets/todo_item.dart';
 import 'package:untitled/model/todo.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
  Home({Key? key}) : super(key: key);
 
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final todosList = ToDo.todoList();
 
   @override
@@ -38,7 +43,11 @@ class Home extends StatelessWidget {
                         ),
 
                         for( ToDo todoo in todosList)
-                        ToDoItem(todo: todoo,),
+                        ToDoItem(
+                          todo: todoo,
+                          onToDoChanged: _handleToDoChange,
+                          onDeleteItem: _deleteToDoItem, //To Implement
+                        ),
                       ],
                     )
                 )
@@ -96,6 +105,18 @@ class Home extends StatelessWidget {
       ),
     );
     //throw UnimplementedError();
+  }
+
+  void _handleToDoChange(ToDo todo){
+    setState(() {
+      todo.isDone = !todo.isDone;
+    });
+  }
+  
+  void _deleteToDoItem(String id){
+    setState(() {
+      todosList.removeWhere((item) => item.id == id);
+    });
   }
 
   Widget searchBox() {
